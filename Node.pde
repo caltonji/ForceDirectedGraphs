@@ -11,8 +11,10 @@ public class Node {
   static final float RECT_HEIGHT = 25;
   static final float HALF_RECT_WIDTH = RECT_WIDTH / 2;
   static final float HALF_RECT_HEIGHT = RECT_HEIGHT / 2;
-  
+  static final int NO_COLOR_VALUE = -1;
   color drawColor = lightBlue;
+  color drawOnceColor = NO_COLOR_VALUE;
+  
   float x;
   float y;
   
@@ -23,13 +25,23 @@ public class Node {
   }
  
   public void draw() {
-    stroke(drawColor);
-    fill(drawColor);
+    if (drawOnceColor != NO_COLOR_VALUE) {
+      stroke(drawOnceColor);
+      fill(drawOnceColor);
+      drawOnceColor = NO_COLOR_VALUE;
+    } else {
+      stroke(drawColor);
+      fill(drawColor);
+    }
     rect(x, y, RECT_WIDTH, RECT_HEIGHT); 
   }
   
-  public void setDrawColor(color drawColor) {
+  public void setDrawOnceColor(color drawOnceColor) {
+    this.drawOnceColor = drawOnceColor;
+  }
+  public Node setDrawColor(color drawColor) {
     this.drawColor = drawColor;
+    return this;
   }
   
   public boolean collidesWithPoint(float x, float y) {

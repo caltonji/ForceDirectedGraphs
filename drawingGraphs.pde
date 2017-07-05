@@ -23,10 +23,31 @@ void setup() {
 }
 
 void draw() {
+  drawDragLine();
   edgeList.drawAllEdges();
   nodeList.drawAllNodes();
 }
 
+void drawDragLine() {
+ if (clickState.hasChainedNode()) {
+    background(beach);
+    stroke(lightOrange);
+   
+    if (pointIsOnADifferentNodeThanTheChainedNode(mouseX, mouseY)) {
+       Node collisionNode = nodeList.getCollisionNode(mouseX, mouseY);
+       collisionNode.setDrawOnceColor(lightOrange);
+       line(clickState.getChainedNode().getCenterX(), clickState.getChainedNode().getCenterY(), 
+            collisionNode.getCenterX(), collisionNode.getCenterY());
+    } else if (nodeList.hasCollisionWithNodeAtCenterPoint(mouseX, mouseY)) {
+      // do nothing  
+    } else {
+      line(clickState.getChainedNode().getCenterX(), clickState.getChainedNode().getCenterY(), mouseX, mouseY);
+      if (!nodeList.hasCollisionWithNodeAtCenterPoint(mouseX, mouseY)) {
+        buildNodeFromCenterPoint(mouseX, mouseY).setDrawColor(lightOrange).draw();
+      }
+    }
+  }  
+}
 void mouseClicked() {
   float clickX = mouseX;
   float clickY = mouseY;
@@ -69,6 +90,7 @@ boolean pointIsOnADifferentNodeThanTheChainedNode(float x, float y) {
 }
 
 public void onEdgeAdded(Edge edge) {
+  background(beach);
   rebalanceAll();
 }
 
