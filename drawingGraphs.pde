@@ -90,7 +90,6 @@ boolean pointIsOnADifferentNodeThanTheChainedNode(float x, float y) {
 }
 
 public void onEdgeAdded(Edge edge) {
-  background(beach);
   rebalanceAll();
 }
 
