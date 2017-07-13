@@ -1,4 +1,6 @@
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
 
 color white = color(255,255,255);
 color black = color(0,0,0);
@@ -11,6 +13,10 @@ color lightOrange = color(243,134,48);
 ClickState clickState;
 NodeList nodeList;
 EdgeList edgeList;
+final int SCREEN_SIZE = 480;
+// need to play with this number
+final double SPRING_CONSTANT = 20;
+
 
 void setup() {
   size(480,480);
@@ -91,8 +97,4 @@ boolean pointIsOnADifferentNodeThanTheChainedNode(float x, float y) {
 
 public void onEdgeAdded(Edge edge) {
   rebalanceAll();
-}
-
-public void rebalanceAll() {
-  
 }

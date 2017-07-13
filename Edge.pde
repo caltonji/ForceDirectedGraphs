@@ -1,6 +1,6 @@
 class Edge {
-  private Node start;
-  private Node end;
+  Node start;
+  Node end;
   
   public Edge(Node start, Node end) {
     this.start = start;
