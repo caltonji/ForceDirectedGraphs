@@ -1,6 +1,7 @@
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
+import java.lang.Math;
 
 color white = color(255,255,255);
 color black = color(0,0,0);
@@ -14,8 +15,7 @@ ClickState clickState;
 NodeList nodeList;
 EdgeList edgeList;
 final int SCREEN_SIZE = 480;
-// need to play with this number
-final double SPRING_CONSTANT = 20;
+
 
 
 void setup() {
@@ -42,12 +42,12 @@ void drawDragLine() {
     if (pointIsOnADifferentNodeThanTheChainedNode(mouseX, mouseY)) {
        Node collisionNode = nodeList.getCollisionNode(mouseX, mouseY);
        collisionNode.setDrawOnceColor(lightOrange);
-       line(clickState.getChainedNode().getCenterX(), clickState.getChainedNode().getCenterY(), 
-            collisionNode.getCenterX(), collisionNode.getCenterY());
+       line((float) clickState.getChainedNode().getCenterX(), (float) clickState.getChainedNode().getCenterY(), 
+            (float) collisionNode.getCenterX(), (float) collisionNode.getCenterY());
     } else if (nodeList.hasCollisionWithNodeAtCenterPoint(mouseX, mouseY)) {
       // do nothing  
     } else {
-      line(clickState.getChainedNode().getCenterX(), clickState.getChainedNode().getCenterY(), mouseX, mouseY);
+      line((float) clickState.getChainedNode().getCenterX(), (float) clickState.getChainedNode().getCenterY(), mouseX, mouseY);
       if (!nodeList.hasCollisionWithNodeAtCenterPoint(mouseX, mouseY)) {
         buildNodeFromCenterPoint(mouseX, mouseY).setDrawColor(lightOrange).draw();
       }
@@ -97,4 +97,5 @@ boolean pointIsOnADifferentNodeThanTheChainedNode(float x, float y) {
 
 public void onEdgeAdded(Edge edge) {
   rebalanceAll();
+  background(beach);
 }

@@ -9,6 +9,7 @@ class Edge {
   
   public void draw() {
     stroke(lightOrange);
-    line(start.getCenterX(), start.getCenterY(), end.getCenterX(), end.getCenterY()); 
+    line((float) start.getCenterX(), (float) start.getCenterY(), 
+         (float) end.getCenterX(), (float) end.getCenterY()); 
   }
 }
